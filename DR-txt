@@ -1,0 +1,2556 @@
+mixed-port: 7890
+ipv6: true
+allow-lan: true
+mode: rule
+log-level: info
+keepalive: 25
+keep-alive-idle: 10
+keep-alive-interval: 15
+unified-delay: false
+geo-auto-update: true
+geo-update-interval: 168
+external-controller: '127.0.0.1:9090'
+secret: 'Hpp@19921992'
+external-ui: ui
+# external-ui-url: 'https://github.com/haishanh/yacd/archive/gh-pages.zip'
+external-ui-url: 'https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip'
+external-controller-cors:
+  allow-origins: ['*']
+  allow-private-network: true
+profile:
+  store-selected: true
+  store-fake-ip: true
+hosts: {}
+dns:
+  enable: true
+  listen: 0.0.0.0:1053
+  ipv6: false
+  respect-rules: true
+  use-hosts: true
+  use-system-hosts: false
+  
+  nameserver:
+    - 'https://1.1.1.1/dns-query'
+    - 'https://8.8.8.8/dns-query'
+    - 'https://dns.quad9.net/dns-query'
+
+  proxy-server-nameserver:
+    - '178.22.122.100' # شکن
+    - '185.51.200.2'   # شکن
+    - '10.202.10.10'   # رادار
+    - '10.202.10.11'   # رادار
+
+  nameserver-policy:
+    'domain:+.ir': [proxy-server-nameserver]
+    'all': [nameserver]
+
+  fallback-filter:
+  geoip: true
+  geoip-code: IR
+  ipcidr:
+    - '240.0.0.0/4'
+  geosite:
+    - 'cn'
+  domain:
+    - '+.ir'
+
+tun:
+  enable: true
+  stack: gvisor
+  auto-route: true
+  strict-route: true
+  auto-detect-interface: true
+  dns-hijack:
+  - 'tcp://any:53'
+  - 'udp://any:53'
+  mtu: 1330
+sniffer:
+  enable: true
+  force-dns-mapping: true
+  parse-pure-ip: true
+  override-destination: false
+  sniff:
+    HTTP:
+      ports: [80, 8080, 8880, 2052, 2082, 2086, 2095]
+    TLS:
+      ports: [443, 8443, 2053, 2083, 2087, 2096]
+    QUIC:
+      ports: [443, 8443]
+proxies:
+#ShadowTLS        
+  - name: "🇩🇪 ShadowTLS-Proxy"
+    type: ss
+    server: net2026.safavidempire.org
+    port: 443
+    cipher: chacha20-ietf-poly1305
+    password: "164c1a57-a952-4962-a848-77355f4864fc"
+    plugin: shadow-tls
+    plugin-opts:
+      host: www.google.com
+      password: "164c1a57-a952-4962-a848-77355f4864fc"
+      version: 3
+#AnyTLS
+  - name: "🇩🇪 anytls-443"
+    type: anytls
+    server: 80.240.26.147
+    port: 443
+    password: "qzJvszJHOB"
+    tls: true
+    sni: "suiany.makingirangreatagain.com"
+    servername: "suiany.makingirangreatagain.com"
+
+  - name: "🇹🇷 DR-Anv - ss"
+    type: ss
+    server: 62.133.63.21
+    port: 65262
+    cipher: chacha20-ietf-poly1305
+    password: "VGmbVSd6gEUvxvEx2aNA4q"
+
+  - name: "🇦🇲 Armenia - 1"
+    type: vless
+    server: 188.164.159.61
+    port: 2096
+    uuid: 12345678-1234-1234-1234-123456789123
+    network: ws
+    tls: true
+    udp: true
+    servername: vless.hubp.de
+    client-fingerprint: chrome
+    allowInsecure: true
+    ws-opts:
+      path: "/snippets"
+      headers:
+        Host: vless.hubp.de
+
+  - name: "DR-Anv-🇵🇱-45"
+    type: ss
+    server: 217.30.10.70
+    port: 9050
+    cipher: aes-256-cfb
+    password: "FG5ddLsMPbV5CutE"
+    udp: true
+  - name: "DR-Anv-🇵🇱-47"
+    type: ss
+    server: 217.30.10.70
+    port: 9057
+    cipher: aes-256-cfb
+    password: "wjTugX3ZtHMB9c3Z"
+    udp: true
+  - name: "DR-Anv-🇵🇱-49"
+    type: ss
+    server: 217.30.10.70
+    port: 9033
+    cipher: aes-256-cfb
+    password: "UTJA57ypk2XKQpnm"
+    udp: true
+  - name: "DR-Anv-🇵🇱-51"
+    type: ss
+    server: 217.30.10.70
+    port: 9003
+    cipher: aes-256-cfb
+    password: "JdmRK9gMEqFgs8nP"
+    udp: true
+  - name: "DR-Anv-🇵🇱-52"
+    type: ss
+    server: 217.30.10.18
+    port: 9042
+    cipher: aes-256-cfb
+    password: "S7KwUu7yBy58S3Ga"
+    udp: true
+  - name: "DR-Anv-🇵🇱-53"
+    type: ss
+    server: 217.30.10.18
+    port: 9027
+    cipher: aes-256-cfb
+    password: "EXN3S3eQpjE7EJu8"
+    udp: true
+  - name: "DR-Anv-🇵🇱-55"
+    type: ss
+    server: 217.30.10.18
+    port: 9084
+    cipher: aes-256-cfb
+    password: "c3NtHJ5ujV2tGDfj"
+    udp: true
+  - name: "DR-Anv-🇵🇱-60"
+    type: ss
+    server: 217.30.10.18
+    port: 9018
+    cipher: aes-256-cfb
+    password: "fG2artUmHfNT2cX7"
+    udp: true
+  - name: "DR-Anv-🇵🇱-61"
+    type: ss
+    server: 217.30.10.70
+    port: 9070
+    cipher: aes-256-cfb
+    password: "bf7v334KKDV3YDhH"
+    udp: true
+  - name: "DR-Anv-🇵🇱-62"
+    type: ss
+    server: 217.30.10.70
+    port: 9014
+    cipher: aes-256-cfb
+    password: "KnJGad3FqTvjqbaX"
+    udp: true
+  - name: "DR-Anv-🇵🇱-63"
+    type: ss
+    server: 217.30.10.70
+    port: 9093
+    cipher: aes-256-cfb
+    password: "wfLC2y7rzZyCmuyt"
+    udp: true
+  - name: "DR-Anv-🇵🇱-66"
+    type: ss
+    server: 217.30.10.18
+    port: 9046
+    cipher: aes-256-cfb
+    password: "NvS8N4Vf8qAGPSCL"
+    udp: true
+  - name: "DR-Anv-🇵🇱-67"
+    type: ss
+    server: 217.30.10.70
+    port: 9046
+    cipher: aes-256-cfb
+    password: "NvS8N4Vf8qAGPSCL"
+    udp: true
+  - name: "DR-Anv-🇵🇱-68"
+    type: ss
+    server: 217.30.10.18
+    port: 9040
+    cipher: aes-256-cfb
+    password: "p9z5BVADH2YFs3MN"
+    udp: true
+    
+  - name: "🇳🇱 DR-Anv - 1"
+    type: hysteria2
+    server: 206.71.158.37
+    port: 36300
+    password: "Yet-Another-Public-Config-1"
+    sni: "YAPC-1.afshin.ir"
+    obfs: salamander
+    obfs-password: "Yet-Another-Public-Config-1"
+    skip-cert-verify: false
+
+  - name: "🇳🇱 DR-Anv - 2"
+    type: hysteria2
+    server: 206.71.158.37
+    port: 35000
+    password: "Yet-Another-Public-Config-1"
+    sni: "YAPC-1.afshin.ir"
+    obfs: salamander
+    obfs-password: "Yet-Another-Public-Config-1"
+    skip-cert-verify: true
+
+  - name: "🇳🇱 DR-Anv - 3"
+    type: hysteria2
+    server: 206.71.158.37
+    port: 36600
+    password: "Yet-Another-Public-Config-1"
+    sni: "YAPC-1.afshin.ir"
+    obfs: salamander
+    obfs-password: "Yet-Another-Public-Config-1"
+    skip-cert-verify: true
+
+  - name: "🇳🇱 DR-Anv - 4"
+    type: hysteria2
+    server: 206.71.158.37
+    port: 35200
+    password: "Yet-Another-Public-Config-1"
+    sni: "YAPC-1.afshin.ir"
+    obfs: salamander
+    obfs-password: "Yet-Another-Public-Config-1"
+    skip-cert-verify: false
+
+  - name: "🇳🇱 DR-Anv - 5"
+    type: hysteria2
+    server: 206.71.158.37
+    port: 35000
+    password: "Yet-Another-Public-Config-1"
+    sni: "YAPC-1.afshin.ir"
+    obfs: salamander
+    obfs-password: "Yet-Another-Public-Config-1"
+    skip-cert-verify: false
+
+  - name: "🇳🇱 DR-Anv - 6"
+    type: hysteria2
+    server: 81.168.83.89
+    port: 2083
+    password: "YwuvGJk36B"
+    sni: ""
+    obfs: salamander
+    obfs-password: "khameniiko@smad@ret"
+    skip-cert-verify: true
+
+  - name: "🇺🇸 DR-Anv - 8"
+    type: hysteria2
+    server: 108.165.213.197
+    port: 23891
+    password: "c232f411-96b5-4b07-b2f7-66a434725ffb"
+    sni: "fus01.mistea.top"
+    skip-cert-verify: true
+
+  - name: "🇬🇧 DR-Anv - 9"
+    type: hysteria2
+    server: yapc-1.adamhayward.co.uk
+    port: 35000
+    password: "Yet-Another-Public-Config-1"
+    sni: "YAPC-1.afshin.ir"
+    obfs: salamander
+    obfs-password: "Yet-Another-Public-Config-1"
+    skip-cert-verify: true
+
+  - name: "DR-Anv-🇳🇱-2"
+    type: hysteria2
+    server: net2025.afsharidempire.uk
+    port: 30205
+    password: 8864aa9f-7517-4fd5-aef1-32050eb3095d
+    sni: net2025.afsharidempire.uk
+    obfs: salamander
+    obfs-password: GdQ4bgvT8RFwuWi2
+    
+  - name: "🇳🇱 NL-hysteria"
+    type: hysteria
+    server: 109.104.153.91
+    port: 37519
+    ports: 10000-20000
+    auth_str: dongtaiwang.com
+    alpn:
+    - h3
+    sni: apple.com
+    skip-cert-verify: true
+    up: 11 Mbps
+    down: 55 Mbps
+
+  - name: "DR-Anv-🇫🇷-2"
+    type: hysteria2
+    server: 51.159.111.32
+    port: 5355
+    password: dongtaiwang.com
+    sni: www.bing.com
+    skip-cert-verify: true
+
+  - name: "🇩🇪 DR-Anv"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "94.242.50.185"
+    port: 443
+    public-key: "Yom91OWyt0otz1S4hgQMhp1q1y8tpDvUWwVkNXpmpjc="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    dns: ["10.255.255.2"]
+    allowed-ips: ["0.0.0.0/0", "::/0"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    persistent-keepalive: 25
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 75
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇦🇹 DR-Anv"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "89.187.168.67"
+    port: 65142
+    public-key: "KtJIKy9zsCXtKwFMQeGDEZVXtqw+X1+5z10Rh84/N0s="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    persistent-keepalive: 25
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 75
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇦🇺 DR-Anv-1"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "103.1.213.212"
+    port: 65142
+    public-key: "jCi1I5HBTtwCblBbMzOFmOOFNG1GilYOZgst0kyq9gY="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    persistent-keepalive: 25
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 75
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h4: 3
+      h3: 4
+
+  - name: "🇦🇺 DR-Anv-2"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "103.77.234.212"
+    port: 65142
+    public-key: "Jhhq6jvPxABM8OmzaM4/zJbcoRBR5OZalIHrZaFuXAU="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 75
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h4: 3
+      h3: 4
+
+  - name: "🇦🇺 DR-Anv-3"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "103.77.232.76"
+    port: 65142
+    public-key: "eSxX+L8qX+1MdmwjtlZGIDbDivFdURBh5Rm1KfUpYzc="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 75
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇦🇺 DR-Anv-4"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "103.108.95.228"
+    port: 65142
+    public-key: "iY4MhQqQTP4uT7U4w9DfUEVxi5I3HJvjZcIL2dwmtTw="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 75
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇦🇺 DR-Anv-5"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "116.206.228.180"
+    port: 65142
+    public-key: "r5BDU0T+VGZU6I+zuF3vlGrdORtgNvLhY08gQxrFRCw="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 75
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇦🇺 DR-Anv"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "116.90.72.244"
+    port: 65142
+    public-key: "tEh6Z8bnFmQU2KWHWYOS7yuDFZgwn3LGOZAdR1hN8kU="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 75
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇦🇺 DR-Anv-6"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "103.62.50.132"
+    port: 65142
+    public-key: "KvFr7Te5+RaFATDKJzrNXKf44ws8J6E9WbNVsMPvY1I="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 75
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇧🇦 DR-Anv"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "185.99.3.25"
+    port: 65142
+    public-key: "6oMHpHHL3pq6Pdr2HoDRYuyjcyQGxfQaSRQR+HPyvgc="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 75
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇨🇦 DR-Anv-1"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "23.191.80.4"
+    port: 65142
+    public-key: "w262TI0UyIg9pFunMiekVURYUuT/z4qXRor2Z7VcOn4="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇨🇦 DR-Anv-2"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "198.8.92.100"
+    port: 65142
+    public-key: "YxWQDjNmU41PJXtoobFek3Y6nhICSLgsqH+QKPO5AQ8="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇨🇦 DR-Anv-3"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "149.57.28.226"
+    port: 65142
+    public-key: "vwimooPysZvNdJULeFQVovYfqhsLG5gVdzgoTnfm+iE="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇨🇦 DR-Anv-4"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "104.244.210.244"
+    port: 65142
+    public-key: "IMHoX/bhNghQVQB0pYKi14pwJhkOcLevpiMa7Khaz2I="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇨🇭 DR-Anv-1"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "185.156.175.180"
+    port: 65142
+    public-key: "uFOg97vQhHVCUfZy/HwmGH+dR6/9lpeWZ5tV3PysHRE="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇨🇾 DR-Anv"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "46.199.75.107"
+    port: 65142
+    public-key: "90fjr1sq0Hgv2l+DgMaaGQ009SDw7VxmzJwaYmclaFs="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇨🇿 DR-Anv"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "185.246.210.3"
+    port: 65142
+    public-key: "dAaOzl6DBAuFWC85UJUY378WwEHUoNqbE5lJMDfNamo="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇨🇿 DR-Anv-1"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: ""
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "185.246.210.3"
+    port: 443
+    public-key: "dAaOzl6DBAuFWC85UJUY378WwEHUoNqbE5lJMDfNamo="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    dns: ["10.255.255.2"]
+    allowed-ips: ["0.0.0.0/0", "::/0"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇫🇷 DR-Anv"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "45.89.174.36"
+    port: 443
+    public-key: "3si2nD1DKbbkeZkdg3hLMfOYw1gdKbVFtTOj2NOA+nM="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    dns: ["10.255.255.2"]
+    allowed-ips: ["0.0.0.0/0", "::/0"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇫🇷 DR-Anv-1"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "45.89.174.36"
+    port: 65142
+    public-key: "3si2nD1DKbbkeZkdg3hLMfOYw1gdKbVFtTOj2NOA+nM="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇬🇧 DR-Anv"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "193.36.118.228"
+    port: 65142
+    public-key: "bGn6yuCFQWWF8+ZMGlJ0M6+IJRlkLXn0/UI/mvIyYwQ="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇭🇰 DR-Anv"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "84.17.57.115"
+    port: 65142
+    public-key: "zi62xnrtbvAbaavB8MLoTF36BX/stxjfnGJ6mIsZYzg="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇮🇸 DR-Anv"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: ""
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "37.156.216.148"
+    port: 443
+    public-key: "0CUpqMsVggxsjvdZewCsBFsw84goCitq0G9nytQhpDw="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    dns: ["10.255.255.2"]
+    allowed-ips: ["0.0.0.0/0", "::/0"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇮🇸 DR-Anv-1"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: ""
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "185.165.170.3"
+    port: 443
+    public-key: "ua7TUXkcSiiHeTyCok5b3PX9DkJ4l5yVvGlSmJ34WU8="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    dns: ["10.255.255.2"]
+    allowed-ips: ["0.0.0.0/0", "::/0"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇮🇸 DR-Anv-2"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "185.165.170.3"
+    port: 65142
+    public-key: "ua7TUXkcSiiHeTyCok5b3PX9DkJ4l5yVvGlSmJ34WU8="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇮🇪 DR-Anv"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "23.92.127.36"
+    port: 65142
+    public-key: "VgzE+XeQUxX54wMZdhRBU4Qxqba95iVpXi197ZbBBgA="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇰🇪 DR-Anv"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "45.138.86.228"
+    port: 65142
+    public-key: "S/qPJPWnfwfb1pWIcKN8FH71j5dFt9eH2KbEeU1+QlE="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇱🇹 DR-Anv"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: ""
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "37.156.216.148"
+    port: 443
+    public-key: "0CUpqMsVggxsjvdZewCsBFsw84goCitq0G9nytQhpDw="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    dns: ["10.255.255.2"]
+    allowed-ips: ["0.0.0.0/0", "::/0"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇱🇺 DR-Anv"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "185.221.132.228"
+    port: 65142
+    public-key: "BzMLell5uUM/d9aNGaGMog+GFH36s4dFO0WuQ6/VxCg="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇲🇰 DR-Anv"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "185.225.28.52"
+    port: 65142
+    public-key: "9J0kA4c4i7N/+6B+3j0zFkDTHocZNsw6eK6+sLZ1qCQ="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇳🇱 DR-Anv-1"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "89.238.150.230"
+    port: 65142
+    public-key: "yrmgyxaJAxTEth7Gc8lXOQVHn9Gn/fzd4cLE+0WZjFI="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+      
+  - name: "🇳🇱 DR-Anv-2"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "185.253.96.4"
+    port: 65142
+    public-key: "c9QHUQhVUNIYqcp5HQ4gwoSoKzAgK8uSsoiJUrlriDA="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇳🇴 DR-Anv"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "37.120.203.68"
+    port: 65142
+    public-key: "y+Kvlfz0z8DF17hVvEezMml3SH3OaB2l5l09DPdQNCk="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇳🇿 DR-Anv"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "103.108.94.164"
+    port: 80
+    public-key: "el0He87GLmmywBmn7ErEiuKd5Bjc6Q4zWciL86rYcxw="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇵🇦 DR-Anv"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "138.186.142.204"
+    port: 65142
+    public-key: "3L8yhe+v7TzBeesOFxSdU2VUa8FG4PTuoiiUoV7DAGY="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇷🇺 DR-Anv-1"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "188.124.42.116"
+    port: 65142
+    public-key: "gLPWBcPANL0mgwEkImb6PUJmR2ncz7S9DKIDDYvgJkk="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇷🇺 DR-Anv-2"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "94.242.50.185"
+    port: 65142
+    public-key: "Yom91OWyt0otz1S4hgQMhp1q1y8tpDvUWwVkNXpmpjc="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇸🇪 DR-Anv"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: "79.142.76.199"
+    port: 65142
+    public-key: "P5X43E/SgvnJtbrKnJwLFxqFoZGsCghW2SxlXvfdzm0="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h3: 3
+      h4: 4
+
+  - name: "🇹🇼 DR-Anv"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: 185.189.163.176
+    port: 65142
+    public-key: "dAAkV3G3YFurH3+3198clav9vlh4FxB1asqNc0tLeCk="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h4: 3
+      h3: 4
+
+  - name: "🇸🇬 DR-Anv"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: 156.146.56.112
+    port: 65142
+    public-key: "sv9o+LudivUcZh3f92hEFFu5KGCT/2QISYy3OpPC0h0="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h4: 3
+      h3: 4
+
+  - name: "🇸🇬 DR-Anv 1"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: 103.107.198.228
+    port: 65142
+    public-key: "tJa6iPx6mpOktn5KoalMslWcpg6pRUdVx3bKDi3wtDg="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h4: 3
+      h3: 4
+
+  - name: "🇺🇸 DR-Anv 2"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: 167.88.60.244
+    port: 65142
+    public-key: "/oz2frQv99JveBgmTXW22QXIEulQURK79BW+ugk8fCE="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h4: 3
+      h3: 4
+
+  - name: "🇺🇸 DR-Anv 3"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: 23.94.74.100
+    port: 65142
+    public-key: "mRksyUF7wDK/8uBoPoEujp+yoUhjhq0N2LnNJFJnmiE="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h4: 3
+      h3: 4
+
+  - name: "🇺🇸 DR-Anv 4"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: 104.255.169.111
+    port: 65142
+    public-key: "oIt9F8IfWqCvSQACrDcmfLPFrhn+RtG+Mr9/sd4VSSU="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h4: 3
+      h3: 4
+
+  - name: "🇺🇸 DR-Anv 5"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: 199.217.104.228
+    port: 65142
+    public-key: "5yBJlSpfxd8Hq4+X4ZD60MYc6tosaMh5inQwA18XCCk="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h4: 3
+      h3: 4
+
+  - name: "🇺🇸 DR-Anv 6"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: 198.12.64.36
+    port: 65142
+    public-key: "z77o+FZ5AcTxTvkNyjLv69ZqaQtzFoS6UdtTK1eyoE8="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h4: 3
+      h3: 4
+
+  - name: "🇺🇸 DR-Anv 7"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: 23.95.42.212
+    port: 65142
+    public-key: "47tLjymDPpTIBerb+wn02/XNFABF4YDAGwOnijSoZmQ="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h4: 3
+      h3: 4
+
+  - name: "🇺🇸 DR-Anv 8"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: 217.138.217.212
+    port: 65142
+    public-key: "fvmyuUJF8JvjzIts5bROwwZQ0zkSB7lk/q8E4G3+F20="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h4: 3
+      h3: 4
+
+  - name: "🇺🇸 DR-Anv 9"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: 194.5.215.196
+    port: 65142
+    public-key: "1S9LgDyVSo2X34ZG8ukQQ7vqL5RpmXszNe0SYNjiUws="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h4: 3
+      h3: 4   
+
+  - name: "🇺🇸 DR-Anv"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: 198.147.22.227
+    port: 65142
+    public-key: "b5fIKEXhihCI7f4NOkQO/2BOd+bYHa0c05OylImgB0E="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h4: 3
+      h3: 4
+
+  - name: "🇻🇳 DR-Anv"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: 103.9.79.220
+    port: 65142
+    public-key: "SxBT11IISNRou7thGo5A1QtaMjfzPIzZXDxdYEbDxhE="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h4: 3
+      h3: 4
+
+  - name: "🇿🇦 DR-Anv 1"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: 165.73.248.92
+    port: 65142
+    public-key: "stPvzj5yM1z5Qg9H3gMvAKNPJLU0X3SeUSJPg3wqDR8="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h4: 3
+      h3: 4
+
+  - name: "🇿🇦 DR-Anv"
+    type: wireguard
+    ip: "100.80.234.177/32"
+    ipv6: "2001:db8:1::1/128"
+    private-key: "cIq+3tcHVT7gRMl4kIv0WE68ERiTmDtA7rhyHhLJ/mg="
+    server: 197.242.159.229
+    port: 65142
+    public-key: "Nh5LEJT44xbuvTQnv3OZ0bXi09BFXV4SBB1XVMI12Ec="
+    pre-shared-key: "N/gfMZSjvP8mbXfVP2hnD5CX8BkGvOyheJ67mCpD+QQ="
+    allowed-ips: ["0.0.0.0/0", "::/0", "10.0.0.0/8"]
+    reserved: "AAAA"
+    udp: true
+    mtu: 1280
+    dns: ["10.255.255.2", "8.8.8.8"]
+    dialer-proxy: ""
+    amnezia-wg-option:
+      jc: 4
+      jmin: 40
+      jmax: 70
+      s1: 0
+      s2: 0
+      h1: 1
+      h2: 2
+      h4: 3
+      h3: 4
+
+#NL
+  - name: "🇳🇱 1 DR-Anv - Vless"
+    type: vless
+    server: braze.com
+    port: 443
+    uuid: 7d18fc67-1994-4f7e-8ff8-c024223f33bb
+    tls: true
+    network: ws
+    servername: revcloud.migacpi.org
+    client-fingerprint: chrome
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/cbde4058-6b81-432b-8689-dd7ce10e479c"
+      headers:
+        Host: revcloud.migacpi.org
+      max-early-data: 2560
+      early-data-header-name: Sec-WebSocket-Protocol
+  - name: "🇳🇱 2 DR-Anv - Vless"
+    type: vless
+    server: vinted.fr
+    port: 443
+    uuid: 7d18fc67-1994-4f7e-8ff8-c024223f33bb
+    tls: true
+    network: ws
+    servername: revcloud.migacpi.org
+    client-fingerprint: chrome
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/cbde4058-6b81-432b-8689-dd7ce10e479c"
+      headers:
+        Host: revcloud.migacpi.org
+      max-early-data: 2560
+      early-data-header-name: Sec-WebSocket-Protocol
+  - name: "🇳🇱 3 DR-Anv - Vless"
+    type: vless
+    server: indeed.com
+    port: 443
+    uuid: 7d18fc67-1994-4f7e-8ff8-c024223f33bb
+    tls: true
+    network: ws
+    servername: revcloud.migacpi.org
+    client-fingerprint: chrome
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/cbde4058-6b81-432b-8689-dd7ce10e479c"
+      headers:
+        Host: revcloud.migacpi.org
+      max-early-data: 2560
+      early-data-header-name: Sec-WebSocket-Protocol
+  - name: "🇳🇱 4 DR-Anv - Vless"
+    type: vless
+    server: economist.com
+    port: 443
+    uuid: 7d18fc67-1994-4f7e-8ff8-c024223f33bb
+    tls: true
+    network: ws
+    servername: revcloud.migacpi.org
+    client-fingerprint: chrome
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/cbde4058-6b81-432b-8689-dd7ce10e479c"
+      headers:
+        Host: revcloud.migacpi.org
+      max-early-data: 2560
+      early-data-header-name: Sec-WebSocket-Protocol
+  - name: "🇳🇱 5 DR-Anv - Vless"
+    type: vless
+    server: autotrader.co.uk
+    port: 443
+    uuid: 7d18fc67-1994-4f7e-8ff8-c024223f33bb
+    tls: true
+    network: ws
+    servername: revcloud.migacpi.org
+    client-fingerprint: chrome
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/cbde4058-6b81-432b-8689-dd7ce10e479c"
+      headers:
+        Host: revcloud.migacpi.org
+      max-early-data: 2560
+      early-data-header-name: Sec-WebSocket-Protocol
+  - name: "🇳🇱 6 DR-Anv - Vless"
+    type: vless
+    server: ico.org.uk
+    port: 443
+    uuid: 7d18fc67-1994-4f7e-8ff8-c024223f33bb
+    tls: true
+    network: ws
+    servername: revcloud.migacpi.org
+    client-fingerprint: chrome
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/cbde4058-6b81-432b-8689-dd7ce10e479c"
+      headers:
+        Host: revcloud.migacpi.org
+      max-early-data: 2560
+      early-data-header-name: Sec-WebSocket-Protocol
+  - name: "🇳🇱 7 DR-Anv - Vless"
+    type: vless
+    server: thailandnet65.ir
+    port: 443
+    uuid: 7d18fc67-1994-4f7e-8ff8-c024223f33bb
+    tls: true
+    network: ws
+    servername: revcloud.migacpi.org
+    client-fingerprint: chrome
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/cbde4058-6b81-432b-8689-dd7ce10e479c"
+      headers:
+        Host: revcloud.migacpi.org
+      max-early-data: 2560
+      early-data-header-name: Sec-WebSocket-Protocol
+  - name: "🇳🇱 8 DR-Anv - Vless"
+    type: vless
+    server: tgju.org
+    port: 443
+    uuid: 7d18fc67-1994-4f7e-8ff8-c024223f33bb
+    tls: true
+    network: ws
+    servername: revcloud.migacpi.org
+    client-fingerprint: chrome
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/cbde4058-6b81-432b-8689-dd7ce10e479c"
+      headers:
+        Host: revcloud.migacpi.org
+      max-early-data: 2560
+      early-data-header-name: Sec-WebSocket-Protocol
+  - name: "🇳🇱 9 DR-Anv - Vless"
+    type: vless
+    server: cdnjs.com
+    port: 443
+    uuid: 7d18fc67-1994-4f7e-8ff8-c024223f33bb
+    tls: true
+    network: ws
+    servername: revcloud.migacpi.org
+    client-fingerprint: chrome
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/cbde4058-6b81-432b-8689-dd7ce10e479c"
+      headers:
+        Host: revcloud.migacpi.org
+      max-early-data: 2560
+      early-data-header-name: Sec-WebSocket-Protocol
+  - name: "🇳🇱 10 DR-Anv - Vless"
+    type: vless
+    server: npmjs.com
+    port: 443
+    uuid: 7d18fc67-1994-4f7e-8ff8-c024223f33bb
+    tls: true
+    network: ws
+    servername: revcloud.migacpi.org
+    client-fingerprint: chrome
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/cbde4058-6b81-432b-8689-dd7ce10e479c"
+      headers:
+        Host: revcloud.migacpi.org
+      max-early-data: 2560
+      early-data-header-name: Sec-WebSocket-Protocol
+  - name: "🇳🇱 11 DR-Anv - Vless"
+    type: vless
+    server: nodejs.org
+    port: 443
+    uuid: 7d18fc67-1994-4f7e-8ff8-c024223f33bb
+    tls: true
+    network: ws
+    servername: revcloud.migacpi.org
+    client-fingerprint: chrome
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/cbde4058-6b81-432b-8689-dd7ce10e479c"
+      headers:
+        Host: revcloud.migacpi.org
+      max-early-data: 2560
+      early-data-header-name: Sec-WebSocket-Protocol
+  - name: "🇳🇱 12 DR-Anv - Vless"
+    type: vless
+    server: fonts.com
+    port: 443
+    uuid: 7d18fc67-1994-4f7e-8ff8-c024223f33bb
+    tls: true
+    network: ws
+    servername: revcloud.migacpi.org
+    client-fingerprint: chrome
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/cbde4058-6b81-432b-8689-dd7ce10e479c"
+      headers:
+        Host: revcloud.migacpi.org
+      max-early-data: 2560
+      early-data-header-name: Sec-WebSocket-Protocol
+  - name: "🇳🇱 13 DR-Anv - Vless"
+    type: vless
+    server: w3.org
+    port: 443
+    uuid: 7d18fc67-1994-4f7e-8ff8-c024223f33bb
+    tls: true
+    network: ws
+    servername: revcloud.migacpi.org
+    client-fingerprint: chrome
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/cbde4058-6b81-432b-8689-dd7ce10e479c"
+      headers:
+        Host: revcloud.migacpi.org
+      max-early-data: 2560
+      early-data-header-name: Sec-WebSocket-Protocol
+  - name: "🇳🇱 14 DR-Anv - Vless"
+    type: vless
+    server: bluehost.com
+    port: 443
+    uuid: 7d18fc67-1994-4f7e-8ff8-c024223f33bb
+    tls: true
+    network: ws
+    servername: revcloud.migacpi.org
+    client-fingerprint: chrome
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/cbde4058-6b81-432b-8689-dd7ce10e479c"
+      headers:
+        Host: revcloud.migacpi.org
+      max-early-data: 2560
+      early-data-header-name: Sec-WebSocket-Protocol
+  - name: "🇳🇱 15 DR-Anv - Vless"
+    type: vless
+    server: ahrefs.com
+    port: 443
+    uuid: 7d18fc67-1994-4f7e-8ff8-c024223f33bb
+    tls: true
+    network: ws
+    servername: revcloud.migacpi.org
+    client-fingerprint: chrome
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/cbde4058-6b81-432b-8689-dd7ce10e479c"
+      headers:
+        Host: revcloud.migacpi.org
+      max-early-data: 2560
+      early-data-header-name: Sec-WebSocket-Protocol
+  - name: "🇳🇱 16 DR-Anv - Vless"
+    type: vless
+    server: chatgpt.com
+    port: 443
+    uuid: 7d18fc67-1994-4f7e-8ff8-c024223f33bb
+    tls: true
+    network: ws
+    servername: revcloud.migacpi.org
+    client-fingerprint: chrome
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/cbde4058-6b81-432b-8689-dd7ce10e479c"
+      headers:
+        Host: revcloud.migacpi.org
+      max-early-data: 2560
+      early-data-header-name: Sec-WebSocket-Protocol
+  - name: "🇳🇱 17 DR-Anv - Vless"
+    type: vless
+    server: codepen.io
+    port: 443
+    uuid: 7d18fc67-1994-4f7e-8ff8-c024223f33bb
+    tls: true
+    network: ws
+    servername: revcloud.migacpi.org
+    client-fingerprint: chrome
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/cbde4058-6b81-432b-8689-dd7ce10e479c"
+      headers:
+        Host: revcloud.migacpi.org
+      max-early-data: 2560
+      early-data-header-name: Sec-WebSocket-Protocol
+  - name: "🇳🇱 18 DR-Anv - Vless"
+    type: vless
+    server: hubspot.com
+    port: 443
+    uuid: 7d18fc67-1994-4f7e-8ff8-c024223f33bb
+    tls: true
+    network: ws
+    servername: revcloud.migacpi.org
+    client-fingerprint: chrome
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/cbde4058-6b81-432b-8689-dd7ce10e479c"
+      headers:
+        Host: revcloud.migacpi.org
+      max-early-data: 2560
+      early-data-header-name: Sec-WebSocket-Protocol
+  - name: "🇳🇱 19 DR-Anv - Vless"
+    type: vless
+    server: surfiran.com
+    port: 443
+    uuid: 7d18fc67-1994-4f7e-8ff8-c024223f33bb
+    tls: true
+    network: ws
+    servername: revcloud.migacpi.org
+    client-fingerprint: chrome
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/cbde4058-6b81-432b-8689-dd7ce10e479c"
+      headers:
+        Host: revcloud.migacpi.org
+      max-early-data: 2560
+      early-data-header-name: Sec-WebSocket-Protocol
+  - name: "🇳🇱 20 DR-Anv - Vless"
+    type: vless
+    server: tappersia.com
+    port: 443
+    uuid: 7d18fc67-1994-4f7e-8ff8-c024223f33bb
+    tls: true
+    network: ws
+    servername: revcloud.migacpi.org
+    client-fingerprint: chrome
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/cbde4058-6b81-432b-8689-dd7ce10e479c"
+      headers:
+        Host: revcloud.migacpi.org
+      max-early-data: 2560
+      early-data-header-name: Sec-WebSocket-Protocol
+  - name: "🇳🇱 21 DR-Anv - Vless"
+    type: vless
+    server: didnegar.com
+    port: 443
+    uuid: 7d18fc67-1994-4f7e-8ff8-c024223f33bb
+    tls: true
+    network: ws
+    servername: revcloud.migacpi.org
+    client-fingerprint: chrome
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/cbde4058-6b81-432b-8689-dd7ce10e479c"
+      headers:
+        Host: revcloud.migacpi.org
+      max-early-data: 2560
+      early-data-header-name: Sec-WebSocket-Protocol
+  - name: "🇳🇱 22 DR-Anv - Vless"
+    type: vless
+    server: ihiran.ir
+    port: 443
+    uuid: 7d18fc67-1994-4f7e-8ff8-c024223f33bb
+    tls: true
+    network: ws
+    servername: revcloud.migacpi.org
+    client-fingerprint: chrome
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/cbde4058-6b81-432b-8689-dd7ce10e479c"
+      headers:
+        Host: revcloud.migacpi.org
+      max-early-data: 2560
+      early-data-header-name: Sec-WebSocket-Protocol
+  - name: "🇳🇱 23 DR-Anv - Vless"
+    type: vless
+    server: vandiet.ir
+    port: 443
+    uuid: 7d18fc67-1994-4f7e-8ff8-c024223f33bb
+    tls: true
+    network: ws
+    servername: revcloud.migacpi.org
+    client-fingerprint: chrome
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/cbde4058-6b81-432b-8689-dd7ce10e479c"
+      headers:
+        Host: revcloud.migacpi.org
+      max-early-data: 2560
+      early-data-header-name: Sec-WebSocket-Protocol
+  - name: "🇳🇱 24 DR-Anv - Vless"
+    type: vless
+    server: check-host.net
+    port: 443
+    uuid: 7d18fc67-1994-4f7e-8ff8-c024223f33bb
+    tls: true
+    network: ws
+    servername: revcloud.migacpi.org
+    client-fingerprint: chrome
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/cbde4058-6b81-432b-8689-dd7ce10e479c"
+      headers:
+        Host: revcloud.migacpi.org
+      max-early-data: 2560
+      early-data-header-name: Sec-WebSocket-Protocol
+  - name: "🇳🇱 25 DR-Anv - Vless"
+    type: vless
+    server: db-ip.com
+    port: 443
+    uuid: 7d18fc67-1994-4f7e-8ff8-c024223f33bb
+    tls: true
+    network: ws
+    servername: revcloud.migacpi.org
+    client-fingerprint: chrome
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/cbde4058-6b81-432b-8689-dd7ce10e479c"
+      headers:
+        Host: revcloud.migacpi.org
+      max-early-data: 2560
+      early-data-header-name: Sec-WebSocket-Protocol
+  - name: "🇳🇱 26 DR-Anv - Vless"
+    type: vless
+    server: hunter.io
+    port: 443
+    uuid: 7d18fc67-1994-4f7e-8ff8-c024223f33bb
+    tls: true
+    network: ws
+    servername: revcloud.migacpi.org
+    client-fingerprint: chrome
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/cbde4058-6b81-432b-8689-dd7ce10e479c"
+      headers:
+        Host: revcloud.migacpi.org
+      max-early-data: 2560
+      early-data-header-name: Sec-WebSocket-Protocol
+  - name: "🇳🇱 27 DR-Anv - Vless"
+    type: vless
+    server: mvps.net
+    port: 443
+    uuid: 7d18fc67-1994-4f7e-8ff8-c024223f33bb
+    tls: true
+    network: ws
+    servername: revcloud.migacpi.org
+    client-fingerprint: chrome
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/cbde4058-6b81-432b-8689-dd7ce10e479c"
+      headers:
+        Host: revcloud.migacpi.org
+      max-early-data: 2560
+      early-data-header-name: Sec-WebSocket-Protocol
+
+  - name: "🇩🇪 Direct-VLESS"
+    type: vless
+    server: hdfynpv2d1.makingirangreatagain.com
+    port: 443
+    uuid: e959d53c-91e9-459d-a332-d59ae89b3b4c
+    packet-encoding: xudp
+    ip-version: ipv4
+    tls: true
+    network: ws
+    tfo: true
+    mptcp: true
+    servername: hdfynpv2d1.makingirangreatagain.com
+    alpn: ["http/1.1"]
+    client-fingerprint: chrome
+    skip-cert-verify: true
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/Iyq035lnud9R8ruNNrqGxZZ2"
+      headers:
+        Host: hdfynpv2d1.makingirangreatagain.com
+      max-early-data: 2048
+      early-data-header-name: Sec-WebSocket-Protocol
+
+  - name: "🇩🇪 AD-CDN-VLESS"
+    type: vless
+    server: hdfynpv2c1.farvaharforever.com
+    port: 443
+    uuid: e959d53c-91e9-459d-a332-d59ae89b3b4c
+    packet-encoding: xudp
+    ip-version: ipv4
+    tls: true
+    network: ws
+    tfo: true
+    mptcp: true
+    servername: hdfynpv2c1.farvaharforever.com
+    alpn: ["http/1.1"]
+    client-fingerprint: chrome
+    skip-cert-verify: true
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/Iyq035lnud9R8ruNNrqGxZZ2"
+      headers:
+        Host: hdfynpv2c1.farvaharforever.com
+      max-early-data: 2048
+      early-data-header-name: Sec-WebSocket-Protocol
+
+ -  name: "TR DR-Anv"
+	type: vmess
+    server: ip.homasub.sbs
+    port: 1008
+    uuid: 68cc31d0-d47e-4f0f-abe3-21d351c0d00a
+    alterId: 0
+    network: tcp
+    cipher: auto
+    servername: myket.ir
+	
+  - name: "🇩🇪 Telegram-VLESS"
+    type: vless
+    server: hdfynpv2d1.farvaharforever.com
+    port: 443
+    uuid: e959d53c-91e9-459d-a332-d59ae89b3b4c
+    packet-encoding: xudp
+    ip-version: ipv4
+    tls: true
+    network: ws
+    tfo: true
+    mptcp: true
+    servername: hdfynpv2d1.farvaharforever.com
+    alpn: ["http/1.1"]
+    client-fingerprint: chrome
+    skip-cert-verify: true
+    fragment:
+      packets: tlshello
+      length: '10-20'
+      interval: '10-20'
+    ws-opts:
+      path: "/Iyq035lnud9R8ruNNrqGxZZ2"
+      headers:
+        Host: hdfynpv2d1.farvaharforever.com
+      max-early-data: 2048
+      early-data-header-name: Sec-WebSocket-Protocol
+
+#Arista
+#Rayan
+#BPB
+#Game
+
+proxy-groups:
+  - name: "💚خانه"
+    type: select
+    proxies: 
+      - "اختصاصی ❤️ خودکار"
+      - "🤍 وارپ"
+      - "🔗 پایدار"
+      - "🇩🇪 ShadowTLS-Proxy"
+      - "🇩🇪 anytls-443"
+      - "DR-Anv-🇳🇱-2"
+      - "DR-Anv-🇫🇷-2"
+      - "🇳🇱 DR-Anv - 1"
+      - "🇳🇱 DR-Anv - 2"
+      - "🇳🇱 DR-Anv - 3"
+      - "🇳🇱 DR-Anv - 4"
+      - "🇳🇱 DR-Anv - 5"
+      - "🇳🇱 DR-Anv - 6"
+      - "🇺🇸 DR-Anv - 8"
+      - "🇬🇧 DR-Anv - 9"
+      - "🇹🇷 DR-Anv - ss"
+      - "🇦🇲 Armenia - 1"
+      - "DR-Anv-🇵🇱-45"
+      - "DR-Anv-🇵🇱-47"
+      - "DR-Anv-🇵🇱-49"
+      - "DR-Anv-🇵🇱-51"
+      - "DR-Anv-🇵🇱-52"
+      - "DR-Anv-🇵🇱-53"
+      - "DR-Anv-🇵🇱-55"
+      - "DR-Anv-🇵🇱-60"
+      - "DR-Anv-🇵🇱-61"
+      - "DR-Anv-🇵🇱-62"
+      - "DR-Anv-🇵🇱-63"
+      - "DR-Anv-🇵🇱-66"
+      - "DR-Anv-🇵🇱-67"
+      - "DR-Anv-🇵🇱-68"
+
+  - name: "اختصاصی ❤️ خودکار"
+    type: url-test
+    url: "http://www.gstatic.com/generate_204"
+    interval: 150
+    tolerance: 60
+    proxies:
+      - "🇳🇱 DR-Anv - 1"
+      - "🇳🇱 DR-Anv - 2"
+      - "🇳🇱 DR-Anv - 3"
+      - "🇳🇱 DR-Anv - 4"
+      - "🇳🇱 DR-Anv - 5"
+      - "🇳🇱 DR-Anv - 6"
+      - "🇺🇸 DR-Anv - 8"
+      - "🇬🇧 DR-Anv - 9"
+      - "DR-Anv-🇳🇱-2"
+      - "DR-Anv-🇫🇷-2"
+      - "🇹🇷 DR-Anv - ss"
+      - "🇦🇲 Armenia - 1"
+      - "DR-Anv-🇵🇱-45"
+      - "DR-Anv-🇵🇱-47"
+      - "DR-Anv-🇵🇱-49"
+      - "DR-Anv-🇵🇱-51"
+      - "DR-Anv-🇵🇱-52"
+      - "DR-Anv-🇵🇱-53"
+      - "DR-Anv-🇵🇱-55"
+      - "DR-Anv-🇵🇱-60"
+      - "DR-Anv-🇵🇱-61"
+      - "DR-Anv-🇵🇱-62"
+      - "DR-Anv-🇵🇱-63"
+      - "DR-Anv-🇵🇱-66"
+      - "DR-Anv-🇵🇱-67"
+      - "DR-Anv-🇵🇱-68"
+      - "TR DR-Anv"
+  - name: "🤍 وارپ"
+    type: url-test
+    url: "http://cp.cloudflare.com"
+    interval: 60
+    tolerance: 90
+    proxies:
+      - "🇩🇪 DR-Anv"
+      - "🇦🇹 DR-Anv"
+      - "🇦🇺 DR-Anv-1"
+      - "🇦🇺 DR-Anv-2"
+      - "🇦🇺 DR-Anv-3"
+      - "🇦🇺 DR-Anv-4"
+      - "🇦🇺 DR-Anv-5"
+      - "🇦🇺 DR-Anv"
+      - "🇦🇺 DR-Anv-6"
+      - "🇧🇦 DR-Anv"
+      - "🇨🇦 DR-Anv-1"
+      - "🇨🇦 DR-Anv-2"
+      - "🇨🇦 DR-Anv-3"
+      - "🇨🇦 DR-Anv-4"
+      - "🇨🇭 DR-Anv-1"
+      - "🇨🇾 DR-Anv"
+      - "🇨🇿 DR-Anv"
+      - "🇨🇿 DR-Anv-1"
+      - "🇫🇷 DR-Anv"
+      - "🇫🇷 DR-Anv-1"
+      - "🇬🇧 DR-Anv"
+      - "🇭🇰 DR-Anv"
+      - "🇮🇸 DR-Anv"
+      - "🇮🇸 DR-Anv-1"
+      - "🇮🇸 DR-Anv-2"
+      - "🇮🇪 DR-Anv"
+      - "🇰🇪 DR-Anv"
+      - "🇱🇹 DR-Anv"
+      - "🇱🇺 DR-Anv"
+      - "🇲🇰 DR-Anv"
+      - "🇳🇱 DR-Anv-1"
+      - "🇳🇱 DR-Anv-2"
+      - "🇳🇴 DR-Anv"
+      - "🇳🇿 DR-Anv"
+      - "🇵🇦 DR-Anv"
+      - "🇷🇺 DR-Anv-1"
+      - "🇷🇺 DR-Anv-2"
+      - "🇸🇪 DR-Anv"
+      - "🇹🇼 DR-Anv"
+      - "🇸🇬 DR-Anv"
+      - "🇸🇬 DR-Anv 1"
+      - "🇺🇸 DR-Anv 2"
+      - "🇺🇸 DR-Anv 3"
+      - "🇺🇸 DR-Anv 4"
+      - "🇺🇸 DR-Anv 5"
+      - "🇺🇸 DR-Anv 6"
+      - "🇺🇸 DR-Anv 7"
+      - "🇺🇸 DR-Anv 8"
+      - "🇺🇸 DR-Anv 9"
+      - "🇺🇸 DR-Anv"
+      - "🇻🇳 DR-Anv"
+      - "🇿🇦 DR-Anv 1"
+      - "🇿🇦 DR-Anv"
+
+  - name: "🔗 پایدار"
+    type: fallback
+    url: "http://www.google.com/generate_204"
+    interval: 300
+    proxies:
+      - "🇳🇱 DR-Anv - 1"
+      - "🇳🇱 DR-Anv - 2"
+      - "🇳🇱 DR-Anv - 3"
+      - "🇳🇱 DR-Anv - 4"
+      - "🇳🇱 DR-Anv - 5"
+      - "🇳🇱 DR-Anv - 6"
+      - "🇺🇸 DR-Anv - 8"
+      - "🇬🇧 DR-Anv - 9"
+      - "DR-Anv-🇳🇱-2"
+      - "DR-Anv-🇫🇷-2"
+      - "🇹🇷 DR-Anv - ss"
+      - "🇦🇲 Armenia - 1"
+      - "DR-Anv-🇵🇱-45"
+      - "DR-Anv-🇵🇱-47"
+      - "DR-Anv-🇵🇱-49"
+      - "DR-Anv-🇵🇱-51"
+      - "DR-Anv-🇵🇱-52"
+      - "DR-Anv-🇵🇱-53"
+      - "DR-Anv-🇵🇱-55"
+      - "DR-Anv-🇵🇱-60"
+      - "DR-Anv-🇵🇱-61"
+      - "DR-Anv-🇵🇱-62"
+      - "DR-Anv-🇵🇱-63"
+      - "DR-Anv-🇵🇱-66"
+      - "DR-Anv-🇵🇱-67"
+      - "DR-Anv-🇵🇱-68"
+      
+rule-providers:
+  malware:
+    type: http
+    format: text
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/malware.txt"
+    path: "./ruleset/malware.txt"
+    interval: 86400
+  malware-cidr:
+    type: http
+    format: text
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/malware-ip.txt"
+    path: "./ruleset/malware-cidr.txt"
+    interval: 86400
+  phishing:
+    type: http
+    format: text
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/phishing.txt"
+    path: "./ruleset/phishing.txt"
+    interval: 86400
+  phishing-cidr:
+    type: http
+    format: text
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/phishing-ip.txt"
+    path: "./ruleset/phishing-cidr.txt"
+    interval: 86400
+  cryptominers:
+    type: http
+    format: text
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/cryptominers.txt"
+    path: "./ruleset/cryptominers.txt"
+    interval: 86400
+  category-ads-all:
+    type: http
+    format: text
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/category-ads-all.txt"
+    path: "./ruleset/category-ads-all.txt"
+    interval: 86400
+  ir:
+    type: http
+    format: text
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/ir.txt"
+    path: "./ruleset/ir.txt"
+    interval: 86400
+  ir-cidr:
+    type: http
+    format: text
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/ircidr.txt"
+    path: "./ruleset/ir-cidr.txt"
+    interval: 86400
+
+rules:
+  - RULE-SET,malware,REJECT
+  - RULE-SET,phishing,REJECT
+  - RULE-SET,cryptominers,REJECT
+  - RULE-SET,category-ads-all,REJECT
+  - RULE-SET,malware-cidr,REJECT
+  - RULE-SET,phishing-cidr,REJECT
+  - GEOIP,IR,DIRECT
+  - RULE-SET,ir,DIRECT
+  - RULE-SET,ir-cidr,DIRECT
+  - MATCH,💚خانه
+
+ntp:
+  enable: true
+  server: time.cloudflare.com
+  port: 123
+  interval: 30
