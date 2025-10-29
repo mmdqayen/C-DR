@@ -2389,7 +2389,6 @@ proxy-groups:
       - "hamedp71-🇵🇱-66"
       - "hamedp71-🇵🇱-67"
       - "hamedp71-🇵🇱-68"
-	  - "🇬🇧 hamedp71"
 
   - name: "🤍 وارپ"
     type: url-test
