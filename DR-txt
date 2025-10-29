@@ -77,7 +77,7 @@ sniffer:
     QUIC:
       ports: [443, 8443]
 proxies:
-#ShadowTLS        
+ShadowTLS        
   - name: "🇩🇪 ShadowTLS-Proxy"
     type: ss
     server: net2026.safavidempire.org
