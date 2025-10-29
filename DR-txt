@@ -2276,6 +2276,7 @@ proxies:
         Host: hdfynpv2c1.farvaharforever.com
       max-early-data: 2048
       early-data-header-name: Sec-WebSocket-Protocol
+
   - name: 🇨🇿 DR
     type: vless
     server: cz-direct.max-pro-service.ir
