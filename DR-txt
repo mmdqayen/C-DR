@@ -2304,7 +2304,7 @@ proxies:
       early-data-header-name: Sec-WebSocket-Protocol
 
   - name: 🇹🇷 Dr-Anv
-	 type: vmess
+	type: vmess
     server: ip.homasub.sbs
     port: 1008
     uuid: 68cc31d0-d47e-4f0f-abe3-21d351c0d00a
