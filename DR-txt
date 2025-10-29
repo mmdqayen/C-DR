@@ -2276,7 +2276,7 @@ proxies:
         Host: hdfynpv2c1.farvaharforever.com
       max-early-data: 2048
       early-data-header-name: Sec-WebSocket-Protocol
- 
+
  -  name: "TR DR-Anv"
 	type: vmess
     server: ip.homasub.sbs
