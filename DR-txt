@@ -2288,7 +2288,7 @@ proxies:
     ws-opts:
       path: /?ed=2052
       headers:
-	    Host: bmw.com
+        Host: bmw.com
 
   - name: DR-Anv-TR
     type: vmess
