@@ -2276,7 +2276,7 @@ proxies:
         Host: hdfynpv2c1.farvaharforever.com
       max-early-data: 2048
       early-data-header-name: Sec-WebSocket-Protocol
-  - name: DR-Anv-TR
+  - name: 🇬🇧 hamedp71
     type: vmess
     server: ip.homasub.sbs
     port: 1008
@@ -2389,6 +2389,7 @@ proxy-groups:
       - "hamedp71-🇵🇱-66"
       - "hamedp71-🇵🇱-67"
       - "hamedp71-🇵🇱-68"
+	  - "🇬🇧 hamedp71"
 
   - name: "🤍 وارپ"
     type: url-test
