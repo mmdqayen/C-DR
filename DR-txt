@@ -2250,7 +2250,8 @@ proxies:
         Host: hdfynpv2d1.makingirangreatagain.com
       max-early-data: 2048
       early-data-header-name: Sec-WebSocket-Protocol
-- name: "🇩🇪 AD-CDN-VLESS"
+
+  - name: "🇩🇪 AD-CDN-VLESS"
     type: vless
     server: hdfynpv2c1.farvaharforever.com
     port: 443
@@ -2275,17 +2276,7 @@ proxies:
         Host: hdfynpv2c1.farvaharforever.com
       max-early-data: 2048
       early-data-header-name: Sec-WebSocket-Protocol
-    
-  - name: "TR DR-Anv"
-    type: vmess
-    server: ip.homasub.sbs
-    port: 1008
-    uuid: 68cc31d0-d47e-4f0f-abe3-21d351c0d00a
-    alterId: 0
-    network: tcp
-    cipher: auto
-    servername: myket.ir
-	
+
   - name: "🇩🇪 Telegram-VLESS"
     type: vless
     server: hdfynpv2d1.farvaharforever.com
@@ -2311,6 +2302,16 @@ proxies:
         Host: hdfynpv2d1.farvaharforever.com
       max-early-data: 2048
       early-data-header-name: Sec-WebSocket-Protocol
+
+  - name: 🇹🇷 Dr-Anv
+	 type: vmess
+    server: ip.homasub.sbs
+    port: 1008
+    uuid: 68cc31d0-d47e-4f0f-abe3-21d351c0d00a
+    alterId: 0
+    network: tcp
+    cipher: auto
+    servername: myket.ir
 
 #Arista
 #Rayan
@@ -2385,7 +2386,7 @@ proxy-groups:
       - "DR-Anv-🇵🇱-66"
       - "DR-Anv-🇵🇱-67"
       - "DR-Anv-🇵🇱-68"
-      - "TR DR-Anv"
+
   - name: "🤍 وارپ"
     type: url-test
     url: "http://cp.cloudflare.com"
