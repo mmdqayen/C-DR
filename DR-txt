@@ -2250,7 +2250,6 @@ proxies:
         Host: hdfynpv2d1.makingirangreatagain.com
       max-early-data: 2048
       early-data-header-name: Sec-WebSocket-Protocol
-
 - name: "🇩🇪 AD-CDN-VLESS"
     type: vless
     server: hdfynpv2c1.farvaharforever.com
